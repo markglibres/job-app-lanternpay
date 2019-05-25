@@ -21,6 +21,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lantern.File", "file\Lanter
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lantern.File.Tests", "tests\Lantern.File.Tests\Lantern.File.Tests.csproj", "{A45E08E5-B373-445A-A3D7-3A8C7F58DCAD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{ED804CF0-F427-4466-8107-9D58D1F9E3EC}"
+ProjectSection(SolutionItems) = preProject
+	..\docker-compose.yml = ..\docker-compose.yml
+	..\ApiDockerFile = ..\ApiDockerFile
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

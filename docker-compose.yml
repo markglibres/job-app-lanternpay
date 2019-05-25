@@ -1,0 +1,13 @@
+version: '3.4'
+services:
+  lanternpay-api:
+    image: lanternpay-api
+    build:
+      context: .
+      dockerfile: ApiDockerFile
+    ports:
+      - "5000:5000"
+  postgre-sql: 
+    image: clkao/postgres-plv8:9.6
+    ports:
+      - "5432:5432"

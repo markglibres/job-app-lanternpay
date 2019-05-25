@@ -1,0 +1,14 @@
+FROM microsoft/dotnet:2.1-sdk AS build-api
+WORKDIR /app
+
+COPY ./src/api/ /app
+RUN dotnet restore /app/Lantern.Api/Lantern.Api.csproj
+RUN dotnet publish /app/Lantern.Api/Lantern.Api.csproj -o /app/src/publish
+
+FROM microsoft/dotnet:2.1-aspnetcore-runtime
+WORKDIR /app
+COPY --from=build-api /app/src/publish /app
+
+EXPOSE 5000
+ENV ASPNETCORE_URLS http://*:5000
+ENTRYPOINT ["dotnet", "Lantern.Api.dll"]
