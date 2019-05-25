@@ -19,7 +19,6 @@ namespace Lantern.File.Services
                 ?.Select(_ => string.Concat(_.Reverse()))
                 .Reverse();
             
-            
             return reversedLine;
         }
     }

@@ -2,7 +2,7 @@ using System.IO;
 
 namespace Lantern.File.Services
 {
-    public class FileStreamReader : IFileStreamReader
+    public class FileStreamReader : IStreamReader
     {
         public Stream GetStream(string filename)
         {
