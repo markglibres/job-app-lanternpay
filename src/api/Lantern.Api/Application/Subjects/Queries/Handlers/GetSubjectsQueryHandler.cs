@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Lantern.Api.Application.Subject.Queries;
 using Lantern.Domain.Subjects.Services;
 using MediatR;
 

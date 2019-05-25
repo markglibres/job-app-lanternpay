@@ -25,10 +25,10 @@ namespace Lantern.Api.Application.Students.Queries.Handlers
         public async Task<GetEnrollmentsByStudentIdQueryModel> Handle(GetEnrollmentsByStudentIdQuery request,
             CancellationToken cancellationToken)
         {
-            if (!await _studentService.IsExists(request.StudentId)) throw new StudentDoesNotExistsException();
+            if (!await _studentService.IsExists(request.Id)) throw new StudentDoesNotExistsException();
 
-            var subjects = await _subjectService.GetAllByStudentId(request.StudentId);
-            var student = await _studentService.GetById(request.StudentId);
+            var subjects = await _subjectService.GetAllByStudentId(request.Id);
+            var student = await _studentService.GetById(request.Id);
 
             var response = new GetEnrollmentsByStudentIdQueryModel
             {

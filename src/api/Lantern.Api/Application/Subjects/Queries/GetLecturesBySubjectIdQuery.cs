@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Lantern.Api.Application.Subjects.Queries
 {
-    public class GetStudentsBySubjectIdQuery : IRequest<GetStudentsBySubjectIdQueryModel>
+    public class GetLecturesBySubjectIdQuery : IRequest<GetLecturesBySubjectIdQueryModel>
     {
         [FromQuery] public Guid Id { get; set; }
     }

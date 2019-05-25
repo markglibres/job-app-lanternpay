@@ -17,9 +17,9 @@ namespace Lantern.Api.Application.Subjects.Queries.Handlers
         
         public async Task<GetStudentsBySubjectIdQueryModel> Handle(GetStudentsBySubjectIdQuery request, CancellationToken cancellationToken)
         {
-            if(!await _subjectService.IsExists(request.SubjectId)) throw new SubjectDoesNotExistsException();
+            if(!await _subjectService.IsExists(request.Id)) throw new SubjectDoesNotExistsException();
 
-            var subject = await _subjectService.GetById(request.SubjectId);
+            var subject = await _subjectService.GetById(request.Id);
             
             var response = new GetStudentsBySubjectIdQueryModel
             {

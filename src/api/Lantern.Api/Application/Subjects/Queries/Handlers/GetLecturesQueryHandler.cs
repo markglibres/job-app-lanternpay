@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Lantern.Api.Application.Subjects.Queries.Handlers
 {
-    public class GetLecturesQueryHandler : IRequestHandler<GetLecturesQuery, GetLecturesQueryModel>
+    public class GetLecturesQueryHandler : IRequestHandler<GetLecturesBySubjectIdQuery, GetLecturesBySubjectIdQueryModel>
     {
         private readonly ISubjectService _subjectService;
 
@@ -14,13 +14,13 @@ namespace Lantern.Api.Application.Subjects.Queries.Handlers
         {
             _subjectService = subjectService;
         }
-        public async Task<GetLecturesQueryModel> Handle(GetLecturesQuery request, CancellationToken cancellationToken)
+        public async Task<GetLecturesBySubjectIdQueryModel> Handle(GetLecturesBySubjectIdQuery request, CancellationToken cancellationToken)
         {
-            if(!await _subjectService.IsExists(request.SubjectId)) throw new SubjectDoesNotExistsException();
+            if(!await _subjectService.IsExists(request.Id)) throw new SubjectDoesNotExistsException();
 
-            var subject = await _subjectService.GetById(request.SubjectId);
+            var subject = await _subjectService.GetById(request.Id);
 
-            var response = new GetLecturesQueryModel
+            var response = new GetLecturesBySubjectIdQueryModel
             {
                 Id = subject.Id,
                 Name = subject.Name,

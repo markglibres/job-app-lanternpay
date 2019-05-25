@@ -26,11 +26,11 @@ namespace Lantern.Api.Application.Lectures.Commands.Handlers
         
         public async Task<Lecture> Handle(CreateLectureCommand request, CancellationToken cancellationToken)
         {
-            if(!await _subjectService.IsExists(request.SubjectId)) throw new SubjectDoesNotExistsException();
+            if(!await _subjectService.IsExists(request.Id)) throw new SubjectDoesNotExistsException();
             
             if(!await _lectureTheatreService.IsExists(request.LectureTheatreId)) throw new LectureTheatreDoesNotExistsException();
 
-            var subject = await _subjectService.GetById(request.SubjectId);
+            var subject = await _subjectService.GetById(request.Id);
             var lectureTheatreId = await _lectureTheatreService.GetById(request.LectureTheatreId);
             
             var lecture = subject.AddLecture(
