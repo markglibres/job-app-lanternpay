@@ -6,17 +6,17 @@ namespace Lantern.File.Services
 {
     public class FileReader : IFileReader
     {
-        private readonly IStreamReader _streamReader;
+        private readonly IStreamService _streamService;
 
-        public FileReader(IStreamReader streamReader)
+        public FileReader(IStreamService streamService)
         {
-            _streamReader = streamReader;
+            _streamService = streamService;
         }
         
         public IEnumerable<string> ReadAllLines(string filename)
         {
             var fileContents = new List<string>();
-            using (var streamReader = new StreamReader(_streamReader.GetStream(filename)))
+            using (var streamReader = new StreamReader(_streamService.GetStreamFromFile(filename)))
             {
                 while (streamReader.Peek() >= 0)
                 {
@@ -25,6 +25,11 @@ namespace Lantern.File.Services
             }
 
             return fileContents;
+        }
+
+        public bool Exists(string filename)
+        {
+            return System.IO.File.Exists(filename);
         }
     }
 }

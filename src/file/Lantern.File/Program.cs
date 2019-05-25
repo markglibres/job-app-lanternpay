@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Lantern.File.Services;
 
 namespace Lantern.File
@@ -8,13 +9,23 @@ namespace Lantern.File
     {
         static void Main(string[] args)
         {
-            var fileStreamReader = new FileStreamReader();
+            var fileStreamReader = new FileStreamService();
             var fileReader = new FileReader(fileStreamReader);
-            var fileProcessor = new FileProcessorService(fileReader);
-
-            var result = fileProcessor.Reverse("fileToReverse.txt");
+            var fileWriter = new FileWriter();
+            var streamService = new FileStreamService();
             
-            Console.WriteLine(string.Join("\r\n", result));
+            var fileProcessor = new FileService(
+                fileReader,
+                fileWriter,
+                streamService);
+
+            var reversedContent = fileProcessor
+                .Reverse("input.txt")
+                .ToList();
+
+            var filename = fileProcessor.WriteToFile("output.txt", reversedContent);
+            Console.WriteLine($"File content reversed and save to: {filename}");
+            
 
         }
     }

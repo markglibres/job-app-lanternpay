@@ -11,11 +11,11 @@ namespace Lantern.File.Tests
     public class FileReaderTests
     {
         private FileReader _fileReader;
-        private Mock<IStreamReader> _fileStreamReader;
+        private Mock<IStreamService> _fileStreamReader;
 
         public FileReaderTests()
         {
-            _fileStreamReader = new Mock<IStreamReader>();
+            _fileStreamReader = new Mock<IStreamService>();
             _fileReader = new FileReader(_fileStreamReader.Object);
         }
         
@@ -25,7 +25,7 @@ namespace Lantern.File.Tests
         {
             // Arrange
             var filename = "test.txt";
-            _fileStreamReader.Setup(_ => _.GetStream(It.IsAny<string>()))
+            _fileStreamReader.Setup(_ => _.GetStreamFromFile(It.IsAny<string>()))
                 .Returns(new MemoryStream(Encoding.UTF8.GetBytes(contents)));
             
             // Act
