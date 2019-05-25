@@ -5,9 +5,15 @@ services:
     build:
       context: .
       dockerfile: ApiDockerFile
+    environment:
+      ASPNETCORE_ENVIRONMENT: "development"
+      ConnectionStrings__DefaultConnection: "Server=lantern-postgre-sql;Port=5432;User Id=postgres;Password=password;"
+    depends_on:
+      - lantern-postgre-sql
     ports:
       - "5000:5000"
-  postgre-sql: 
-    image: clkao/postgres-plv8:9.6
+      
+  lantern-postgre-sql: 
+    image: postgre-sql
     ports:
       - "5432:5432"
