@@ -4,4 +4,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Lectures" />
+    <Folder Include="Students" />
+    <Folder Include="Subject" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lantern.Domain\Lantern.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
