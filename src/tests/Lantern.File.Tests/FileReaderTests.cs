@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,23 +11,22 @@ namespace Lantern.File.Tests
     public class FileReaderTests
     {
         private FileReader _fileReader;
-        private Mock<IFileStreamReader> _fileStreamReader;
+        private Mock<IStreamService> _fileStreamReader;
 
         public FileReaderTests()
         {
-            _fileStreamReader = new Mock<IFileStreamReader>();
+            _fileStreamReader = new Mock<IStreamService>();
             _fileReader = new FileReader(_fileStreamReader.Object);
         }
         
-        [Fact]
-        public void Test()
+        [Theory]
+        [MemberData(nameof(FileContentsToRead))]
+        public void Should_Read_File_Contents(string contents, List<string> expectedLines)
         {
             // Arrange
             var filename = "test.txt";
-            var content = "this is the file content";
-
-            _fileStreamReader.Setup(_ => _.GetStream(It.IsAny<string>()))
-                .Returns(new MemoryStream(Encoding.UTF8.GetBytes(content)));
+            _fileStreamReader.Setup(_ => _.GetStreamFromFile(It.IsAny<string>()))
+                .Returns(new MemoryStream(Encoding.UTF8.GetBytes(contents)));
             
             // Act
             var result = _fileReader
@@ -35,8 +35,38 @@ namespace Lantern.File.Tests
             
             // Assert
             Assert.NotNull(result);
-            Assert.True(result.Any());
-            Assert.Equal(content, result.FirstOrDefault());
+            Assert.Equal(expectedLines.Count, result.Count);
+            Assert.All(expectedLines, line => result.Contains(line));
         }
+
+        public static List<object[]> FileContentsToRead()
+        {
+            return new List<object[]>
+            {
+                new object[]
+                {
+                    "",
+                    new List<string>(), 
+                },
+                new object[]
+                {
+                    "this is the file content",
+                    new List<string>
+                    {
+                        "this is the file content"
+                    }, 
+                },
+                new object[]
+                {
+                    "this is the file content\r\ntest",
+                    new List<string>
+                    {
+                        "this is the file content",
+                        "test"
+                    }, 
+                }
+            };
+        }
+        
     }
 }
