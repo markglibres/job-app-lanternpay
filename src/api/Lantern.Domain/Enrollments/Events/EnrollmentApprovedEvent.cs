@@ -1,5 +1,6 @@
 using System;
 using Lantern.Domain.Models;
+using Lantern.Domain.SeedWork;
 
 namespace Lantern.Domain.Enrollments.Events
 {

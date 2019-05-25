@@ -1,4 +1,4 @@
-namespace Lantern.Core.Subject.Commands
+namespace Lantern.Api.Application.Students.Commands
 {
     public class CreateStudentCommand 
     {

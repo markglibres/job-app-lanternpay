@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Lantern.Domain.Models
+namespace Lantern.Domain.SeedWork
 {
     public interface IHasDomainEvents
     {

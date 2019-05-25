@@ -1,4 +1,4 @@
-namespace Lantern.Core.Subject.Queries
+namespace Lantern.Api.Application.Subject.Queries
 {
     public class GetSubjectsQuery
     {

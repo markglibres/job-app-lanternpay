@@ -1,4 +1,4 @@
-namespace Lantern.Core.Students.Queries
+namespace Lantern.Api.Application.Students.Queries
 {
     public class GetStudentsQuery
     {

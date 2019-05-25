@@ -1,6 +1,6 @@
 using System;
 
-namespace Lantern.Domain.Models
+namespace Lantern.Domain.SeedWork
 {
     public abstract class Entity
     {

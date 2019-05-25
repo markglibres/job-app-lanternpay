@@ -1,6 +1,7 @@
 using System;
 using Lantern.Domain.Enrollments.Events;
 using Lantern.Domain.Models;
+using Lantern.Domain.SeedWork;
 using Newtonsoft.Json;
 
 namespace Lantern.Domain.Enrollments

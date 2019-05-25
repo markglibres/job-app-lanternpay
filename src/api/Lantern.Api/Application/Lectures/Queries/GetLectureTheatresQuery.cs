@@ -1,4 +1,4 @@
-namespace Lantern.Core.Lectures.Queries
+namespace Lantern.Api.Application.Lectures.Queries
 {
     public class GetLectureTheatresQuery
     {

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Lantern.Domain.Models;
+using Lantern.Domain.SeedWork;
 using Lantern.Domain.Students;
 using Lantern.Domain.Subject.Events;
 using Newtonsoft.Json;

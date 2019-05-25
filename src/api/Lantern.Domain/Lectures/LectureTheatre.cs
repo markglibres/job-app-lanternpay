@@ -1,4 +1,5 @@
 using System;
+using Lantern.Domain.SeedWork;
 using Newtonsoft.Json;
 
 namespace Lantern.Domain.Models

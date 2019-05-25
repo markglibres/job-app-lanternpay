@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using Lantern.Domain.Models;
 
-namespace Lantern.Domain.Models
+namespace Lantern.Domain.SeedWork
 {
     public abstract class AggregateRoot : Entity, IHasDomainEvents
     {

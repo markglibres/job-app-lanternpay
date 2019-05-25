@@ -5,9 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Lectures" />
-    <Folder Include="Students" />
-    <Folder Include="Subject" />
+    <Folder Include="Application\DomainEventHandlers" />
   </ItemGroup>
 
   <ItemGroup>
