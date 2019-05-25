@@ -4,9 +4,9 @@ using MediatR;
 
 namespace Lantern.Domain.Enrollments.Events
 {
-    public class EnrollmentApprovedEvent : DomainEvent, INotification
+    public class EnrollmentRejectedEvent: DomainEvent, INotification
     {
-        public EnrollmentApprovedEvent(Guid enrollmentId)
+        public EnrollmentRejectedEvent(Guid enrollmentId)
         {
             Id = Guid.NewGuid();
             EnrollmentId = enrollmentId;

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Lantern.Domain.Models;
 
 namespace Lantern.Domain.SeedWork
 {

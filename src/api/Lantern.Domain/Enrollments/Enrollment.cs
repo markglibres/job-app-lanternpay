@@ -1,6 +1,5 @@
 using System;
 using Lantern.Domain.Enrollments.Events;
-using Lantern.Domain.Models;
 using Lantern.Domain.SeedWork;
 using Newtonsoft.Json;
 
@@ -23,12 +22,15 @@ namespace Lantern.Domain.Enrollments
             StudentId = studentId;
             Id = Guid.NewGuid();
             Status = EnrollmentStatus.Pending;
+            RejectReason = EnrollmentRejectReason.NotApplicable;
+
         }
 
         public Guid ApplicationId { get; }
         public Guid SubjectId { get; }
         public Guid StudentId { get; }
         public EnrollmentStatus Status { get; private set; }
+        public EnrollmentRejectReason RejectReason { get; private set; }
 
         public void Approve()
         {
@@ -36,9 +38,10 @@ namespace Lantern.Domain.Enrollments
             Emit(new EnrollmentApprovedEvent(Id));
         }
 
-        public void Reject()
+        public void Reject(EnrollmentRejectReason reason)
         {
             Status = EnrollmentStatus.Error;
+            RejectReason = reason;
         }
     }
 }

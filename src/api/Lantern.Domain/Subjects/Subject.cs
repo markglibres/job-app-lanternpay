@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Lantern.Domain.Models;
+using Lantern.Domain.Lectures;
 using Lantern.Domain.SeedWork;
 using Lantern.Domain.Students;
-using Lantern.Domain.Subject.Events;
+using Lantern.Domain.Subjects.Events;
 using Newtonsoft.Json;
 
-namespace Lantern.Domain.Subject
+namespace Lantern.Domain.Subjects
 {
     public class Subject : AggregateRoot
     {
@@ -27,7 +27,7 @@ namespace Lantern.Domain.Subject
         public List<Lecture> Lectures { get; }
         public List<Student> Students { get; private set; }
 
-        public void AddLecture(
+        public Lecture AddLecture(
             DayOfWeek dayOfWeek,
             DateTime startTime,
             DateTime endTime,
@@ -41,6 +41,8 @@ namespace Lantern.Domain.Subject
                 endTime);
 
             Lectures.Add(lecture);
+
+            return lecture;
         }
 
         public Guid Enroll(Student student)

@@ -2,7 +2,7 @@ using System;
 using Lantern.Domain.SeedWork;
 using Newtonsoft.Json;
 
-namespace Lantern.Domain.Models
+namespace Lantern.Domain.Lectures
 {
     public class LectureTheatre : Entity
     {
