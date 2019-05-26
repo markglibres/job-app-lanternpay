@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Lantern.Api.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
+using MediatR;
 
 namespace Lantern.Api
 {
@@ -31,6 +33,11 @@ namespace Lantern.Api
             {
                 c.SwaggerDoc("v1", new Info { Title = "LanternPay API", Version = "v1" });
             });
+
+            services.ConfigureDocumentStore(Configuration);
+            services.AddMediatR(typeof(Startup).Assembly);
+            services.ConfigureLanternServices();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
