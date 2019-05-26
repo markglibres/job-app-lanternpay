@@ -1,13 +1,5 @@
 # LanternPay - Programming Exercise
 
-**Using Postman collection**
-
-1. Import postman collections found at /postman/LanternPay.postman_collection.json
-2. Import postman environment variables at /postman/LanternPay.postman_environment.json
-
-*Collections*
-1. Get all lecture theatres = add new lecture theatre
-
 **How to run API with docker**
 
 1. Go to API project folder (/src/api/Lantern.Api)
@@ -38,3 +30,12 @@ p: password
 ```
 
 5. API endpoint is accessible at: http://localhost:5000
+6. Swagger endpoint is at: http://localhost:5000/swagger
+
+**Testing using Postman collection**
+
+1. Import postman collections found at /postman/LanternPay.postman_collection.json
+2. Import postman environment variables at /postman/LanternPay.postman_environment.json
+
+*Collections*
+1. Get all lecture theatres = add new lecture theatre
