@@ -26,7 +26,9 @@ namespace Lantern.Api.Controllers
         [ProducesResponseType(typeof(LectureTheatre), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Create([FromBody] CreateLectureTheatreCommand command)
         {
-            return Ok();
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
         }
 
         [HttpGet]
@@ -39,11 +41,13 @@ namespace Lantern.Api.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("{Id}")]
         [ProducesResponseType(typeof(LectureTheatre),(int) HttpStatusCode.OK)]
-        public async Task<IActionResult> GetById(GetLectureTheatreByIdQuery query)
+        public async Task<IActionResult> GetById(Guid id)
         {
-            return Ok();
+            var result = await _mediator.Send(new GetLectureTheatreByIdQuery{ Id = id});
+            
+            return Ok(result);
         }
     }
 }
