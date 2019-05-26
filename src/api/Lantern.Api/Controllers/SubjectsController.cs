@@ -9,6 +9,7 @@ using Lantern.Api.Application.Subjects.Queries;
 using Lantern.Domain.Lectures;
 using Lantern.Domain.Students;
 using Lantern.Domain.Subjects;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lantern.Api.Controllers
@@ -17,11 +18,20 @@ namespace Lantern.Api.Controllers
     [ApiController]
     public class SubjectsController : Controller
     {
+        private readonly IMediator _mediator;
+
+        public SubjectsController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+        
         [HttpPost]
         [ProducesResponseType(typeof(Subject), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Create([FromBody] CreateSubjectCommand command)
         {
-            return Ok();
+            var result = await _mediator.Send(command);
+            
+            return Ok(result);
         }
 
         [HttpGet]

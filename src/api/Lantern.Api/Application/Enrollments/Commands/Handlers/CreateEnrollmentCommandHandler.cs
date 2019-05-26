@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Lantern.Api.Application.Enrollments.Commands.Handlers
 {
-    public class CreateEnrollmentCommandHandler : IRequestHandler<CreateEnrollmentCommand, Guid>
+    public class CreateEnrollmentCommandHandler : IRequestHandler<CreateEnrollmentCommand, CreateEnrollmentCommandModel>
     {
         private readonly IStudentService _studentService;
         private readonly ISubjectService _subjectService;
@@ -19,7 +19,7 @@ namespace Lantern.Api.Application.Enrollments.Commands.Handlers
             _studentService = studentService;
             _subjectService = subjectService;
         }
-        public async Task<Guid> Handle(CreateEnrollmentCommand request, CancellationToken cancellationToken)
+        public async Task<CreateEnrollmentCommandModel> Handle(CreateEnrollmentCommand request, CancellationToken cancellationToken)
         {
             if (!await _studentService.IsExists(request.StudentId)) throw new StudentDoesNotExistsException();
 
@@ -30,7 +30,7 @@ namespace Lantern.Api.Application.Enrollments.Commands.Handlers
 
             var enrollmentId = subject.Enroll(student);
 
-            return enrollmentId;
+            return new CreateEnrollmentCommandModel{ EnrollmentId = enrollmentId };
 
         }
     }
