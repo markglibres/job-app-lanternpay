@@ -30,7 +30,7 @@ namespace Lantern.Core.Services.LectureTheatres
 
         public async Task<LectureTheatre> Create(string name, int capacity)
         {
-            if (await IsExists(name)) throw new LectureTheatreAlreadyExistsException();
+            if (await IsExists(name)) throw new LectureTheatreAlreadyExistsException(name);
             
             var theatre = new LectureTheatre(name, capacity);
 
