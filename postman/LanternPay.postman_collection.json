@@ -1,0 +1,24 @@
+{
+	"info": {
+		"_postman_id": "d6e10c52-1c9e-4bec-b9d4-2c9dc38b0cba",
+		"name": "LanternPay",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Lecture Theatres",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	]
+}

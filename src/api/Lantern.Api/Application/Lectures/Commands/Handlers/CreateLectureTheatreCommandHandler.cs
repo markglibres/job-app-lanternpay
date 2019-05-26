@@ -1,6 +1,5 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Lantern.Api.Application.Lectures.Exceptions;
 using Lantern.Domain.Lectures;
 using Lantern.Domain.Lectures.Services;
 using MediatR;
@@ -19,8 +18,6 @@ namespace Lantern.Api.Application.Lectures.Commands.Handlers
         public async Task<LectureTheatre> Handle(CreateLectureTheatreCommand request,
             CancellationToken cancellationToken)
         {
-            if (await _lectureTheatreService.IsExists(request.Name)) throw new LectureTheatreAlreadyExistsException(request.Name);
-
             var lectureTheatre = await _lectureTheatreService.Create(request.Name, request.Capacity);
 
             await _lectureTheatreService.Save(lectureTheatre);

@@ -1,6 +1,5 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Lantern.Api.Application.Lectures.Exceptions;
 using Lantern.Domain.Lectures;
 using Lantern.Domain.Lectures.Services;
 using MediatR;
@@ -15,11 +14,10 @@ namespace Lantern.Api.Application.Lectures.Queries.Handlers
         {
             _lectureTheatreService = lectureTheatreService;
         }
-        
-        public async Task<LectureTheatre> Handle(GetLectureTheatreByIdQuery request, CancellationToken cancellationToken)
-        {
-            if(!await _lectureTheatreService.IsExists(request.Id)) throw new LectureTheatreDoesNotExistsException();
 
+        public async Task<LectureTheatre> Handle(GetLectureTheatreByIdQuery request,
+            CancellationToken cancellationToken)
+        {
             var theatre = await _lectureTheatreService.GetById(request.Id);
 
             return theatre;

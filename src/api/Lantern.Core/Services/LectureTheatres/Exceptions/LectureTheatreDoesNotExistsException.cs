@@ -1,6 +1,6 @@
 using System;
 
-namespace Lantern.Api.Application.Lectures.Exceptions
+namespace Lantern.Core.Services.LectureTheatres.Exceptions
 {
     public class LectureTheatreDoesNotExistsException : Exception
     {

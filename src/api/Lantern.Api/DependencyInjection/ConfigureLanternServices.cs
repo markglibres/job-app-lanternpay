@@ -1,6 +1,8 @@
 using Lantern.Core.SeedWork;
+using Lantern.Core.Services.LectureTheatres;
 using Lantern.Domain.Enrollments;
 using Lantern.Domain.Lectures;
+using Lantern.Domain.Lectures.Services;
 using Lantern.Domain.SeedWork;
 using Lantern.Domain.Students;
 using Lantern.Domain.Students.Services;
@@ -13,11 +15,14 @@ namespace Lantern.Api.DependencyInjection
     {
         public static IServiceCollection ConfigureLanternServices(this IServiceCollection services)
         {
+            
             services
                 .AddTransient<IRepository<Student>, Repository<Student>>()
                 .AddTransient<IRepository<Subject>, Repository<Subject>>()
                 .AddTransient<IRepository<LectureTheatre>, Repository<LectureTheatre>>()
                 .AddTransient<IRepository<Enrollment>, Repository<Enrollment>>();
+
+            services.AddTransient<ILectureTheatreService, LectureTheatreService>();
 
             return services;
         }

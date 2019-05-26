@@ -6,6 +6,7 @@ using Lantern.Api.Application.Lectures.Commands;
 using Lantern.Api.Application.Lectures.Queries;
 using Lantern.Api.Application.Subjects.Commands;
 using Lantern.Domain.Lectures;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lantern.Api.Controllers
@@ -14,6 +15,13 @@ namespace Lantern.Api.Controllers
     [ApiController]
     public class LectureTheatresController : Controller
     {
+        private readonly IMediator _mediator;
+
+        public LectureTheatresController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+        
         [HttpPost]
         [ProducesResponseType(typeof(LectureTheatre), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Create([FromBody] CreateLectureTheatreCommand command)
@@ -23,9 +31,11 @@ namespace Lantern.Api.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<LectureTheatre>), (int) HttpStatusCode.OK)]
-        public async Task<IActionResult> GetAll(GetLectureTheatresQuery query)
+        public async Task<IActionResult> GetAll()
         {
-            return Ok();
+            var result = await _mediator.Send(new GetLectureTheatresQuery());
+            
+            return Ok(result);
         }
 
         [HttpGet]

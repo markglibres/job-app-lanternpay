@@ -11,5 +11,7 @@ namespace Lantern.Domain.SeedWork
         Task<T> FindByIdAsync(Guid entityId);
         Task<IEnumerable<T>> FindByPredicate(Expression<Func<T, bool>> predicate);
         Task SaveAsync(T entity);
+        Task<bool> IsExists(Guid entityId);
+        Task<IEnumerable<T>> FindAll();
     }
 }

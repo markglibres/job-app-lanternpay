@@ -10,6 +10,8 @@ services:
       ConnectionStrings__DefaultConnection: "Server=lantern-postgre-sql;Port=5432;User Id=postgres;Password=password;"
     depends_on:
       - lantern-postgre-sql
+      - lantern-pgadmin
+      
     ports:
       - "5000:5000"
       
@@ -17,3 +19,11 @@ services:
     image: postgre-sql
     ports:
       - "5432:5432"
+      
+  lantern-pgadmin:
+    image: dpage/pgadmin4
+    ports:
+    - "5431:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin"
+      PGADMIN_DEFAULT_PASSWORD: "password"
