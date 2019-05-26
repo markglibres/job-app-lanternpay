@@ -43,9 +43,9 @@ namespace Lantern.Api.Controllers
         [HttpGet]
         [Route("{Id}")]
         [ProducesResponseType(typeof(LectureTheatre),(int) HttpStatusCode.OK)]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<IActionResult> GetById([FromRoute] GetLectureTheatreByIdQuery query)
         {
-            var result = await _mediator.Send(new GetLectureTheatreByIdQuery{ Id = id});
+            var result = await _mediator.Send(query);
             
             return Ok(result);
         }

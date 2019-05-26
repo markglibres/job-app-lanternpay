@@ -50,14 +50,14 @@ namespace Lantern.Core.Services.Subjects
             await _repository.SaveAsync(subject);
         }
 
-        public Task<bool> IsExists(Guid requestSubjectId)
+        public async Task<bool> IsExists(Guid subjectId)
         {
-            throw new NotImplementedException();
+            return await _repository.IsExists(subjectId);
         }
 
-        public Task<Subject> GetById(Guid requestSubjectId)
+        public async Task<Subject> GetById(Guid subjectId)
         {
-            throw new NotImplementedException();
+            return await _repository.FindByIdAsync(subjectId);
         }
 
         public Task<IEnumerable<Subject>> GetAllByStudentId(Guid requestStudentId)

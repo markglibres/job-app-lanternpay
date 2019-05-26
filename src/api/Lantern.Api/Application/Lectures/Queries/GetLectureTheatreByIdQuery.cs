@@ -7,6 +7,7 @@ namespace Lantern.Api.Application.Lectures.Queries
 {
     public class GetLectureTheatreByIdQuery : IRequest<LectureTheatre>
     {
+        [FromRoute]
         public Guid Id { get; set; }
     }
 }

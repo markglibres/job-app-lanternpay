@@ -44,15 +44,16 @@ namespace Lantern.Api.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("{Id}")]
         [ProducesResponseType(typeof(Subject),(int) HttpStatusCode.OK)]
-        public async Task<IActionResult> GetById(GetSubjectByIdQuery query)
+        public async Task<IActionResult> GetById([FromRoute] GetSubjectByIdQuery query)
         {
-            return Ok();
+            var result = await _mediator.Send(query);
+            return Ok(result);
         }
 
         [HttpPost]
-        [Route("{id}/lectures")]
+        [Route("{Id}/lectures")]
         [ProducesResponseType(typeof(Lecture), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> CreateLecture(CreateLectureCommand command)
         {
@@ -60,7 +61,7 @@ namespace Lantern.Api.Controllers
         }
 
         [HttpGet]
-        [Route("{id}/lectures")]
+        [Route("{Id}/lectures")]
         [ProducesResponseType(typeof(GetLecturesBySubjectIdQueryModel), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetLecturesBySubject(GetLecturesBySubjectIdQuery query)
         {
@@ -68,7 +69,7 @@ namespace Lantern.Api.Controllers
         }
 
         [HttpGet]
-        [Route("{id}/students")]
+        [Route("{Id}/students")]
         [ProducesResponseType(typeof(GetStudentsBySubjectIdQueryModel), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetStudentsBySubject(GetStudentsBySubjectIdQuery query)
         {

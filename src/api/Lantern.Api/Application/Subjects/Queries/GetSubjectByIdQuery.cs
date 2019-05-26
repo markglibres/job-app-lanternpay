@@ -6,7 +6,7 @@ namespace Lantern.Api.Application.Subjects.Queries
 {
     public class GetSubjectByIdQuery : IRequest<Domain.Subjects.Subject>
     {
-        [FromQuery]
+        [FromRoute]
         public Guid Id { get; set; }
     }
 }
