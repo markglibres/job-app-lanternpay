@@ -12,7 +12,7 @@ namespace Lantern.Domain.Students
             
         }
         
-        public string Name { get; }
+        public string Name { get; private set; }
 
         public Student(
             string name)

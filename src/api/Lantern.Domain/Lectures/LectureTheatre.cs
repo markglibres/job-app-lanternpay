@@ -21,7 +21,7 @@ namespace Lantern.Domain.Lectures
             Capacity = capacity;
         }
 
-        public int Capacity { get; protected set; }
-        public string Name { get; protected set; }
+        public int Capacity { get; private set; }
+        public string Name { get; private set; }
     }
 }

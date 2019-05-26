@@ -26,9 +26,9 @@ namespace Lantern.Domain.Enrollments
 
         }
 
-        public Guid ApplicationId { get; }
-        public Guid SubjectId { get; }
-        public Guid StudentId { get; }
+        public Guid ApplicationId { get; private set; }
+        public Guid SubjectId { get; private set; }
+        public Guid StudentId { get; private set; }
         public EnrollmentStatus Status { get; private set; }
         public EnrollmentRejectReason RejectReason { get; private set; }
 

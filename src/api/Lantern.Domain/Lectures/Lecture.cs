@@ -24,10 +24,10 @@ namespace Lantern.Domain.Lectures
             LectureTheatreId = lectureTheatreId;
         }
 
-        public DayOfWeek DayOfWeek { get; protected set; }
-        public DateTime StartTime { get; protected set; }
-        public DateTime EndTime { get; protected set; }
-        public Guid SubjectId  { get; protected set; }
-        public Guid LectureTheatreId  { get; protected set; }
+        public DayOfWeek DayOfWeek { get; private set; }
+        public DateTime StartTime { get; private set; }
+        public DateTime EndTime { get; private set; }
+        public Guid SubjectId  { get; private set; }
+        public Guid LectureTheatreId  { get; private set; }
     }
 }
