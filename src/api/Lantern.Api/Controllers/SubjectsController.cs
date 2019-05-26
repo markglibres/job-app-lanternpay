@@ -36,9 +36,11 @@ namespace Lantern.Api.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Subject>), (int) HttpStatusCode.OK)]
-        public async Task<IActionResult> GetAll(GetSubjectsQuery query)
+        public async Task<IActionResult> GetAll()
         {
-            return Ok();
+            var result = await _mediator.Send(new GetSubjectsQuery());
+            
+            return Ok(result);
         }
 
         [HttpGet]

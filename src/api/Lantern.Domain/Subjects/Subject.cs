@@ -23,8 +23,8 @@ namespace Lantern.Domain.Subjects
             Lectures = new List<Lecture>();
         }
 
-        public string Name { get; }
-        public List<Lecture> Lectures { get; }
+        public string Name { get; private set; }
+        public List<Lecture> Lectures { get; private set; }
         public List<Student> Students { get; private set; }
 
         public Lecture AddLecture(

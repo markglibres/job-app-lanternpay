@@ -31,9 +31,10 @@ namespace Lantern.Core.Services.Subjects
             return subject;
         }
 
-        public Task<IEnumerable<Subject>> GetAll()
+        public async Task<IEnumerable<Subject>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _repository
+                .FindAll();
         }
 
         public async Task<bool> IsExists(string name)

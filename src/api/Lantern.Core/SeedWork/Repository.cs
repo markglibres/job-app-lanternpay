@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 using Lantern.Domain.SeedWork;
 using Marten;
+using Marten.Linq;
 
 namespace Lantern.Core.SeedWork
 {
@@ -63,8 +65,11 @@ namespace Lantern.Core.SeedWork
         {
             using (var session = _documentStore.OpenSession())
             {
-                var query = await session.Query<T>()
-                    .ToListAsync();
+                var query = await session
+                    .Query<T>()
+                    .ToListAsync()
+                    .ConfigureAwait(false);
+                
                 return query;
             }
         }
