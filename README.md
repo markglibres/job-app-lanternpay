@@ -73,3 +73,19 @@ dotnet run
 
 7. Api endpoint at: http://localhost:5000/
 8. Attach debugger from Visual Studio or JetBrains Rider
+
+**How to run console app file reverse project**
+
+1. On shell, go to /src/file/Lantern.File
+2. Edit input.txt for the file to reverse
+3. Build the project
+```
+dotnet build
+```
+4. Run the project
+```
+dotnet run
+````
+5. Check output_<datetime tick value>.txt contents (every run generates a unique filename if output.txt already exists)
+  
+NOTE: Unit tests can be found on /src/tests
