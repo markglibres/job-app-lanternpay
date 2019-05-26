@@ -2,7 +2,7 @@
 
 **How to run API with docker**
 
-*NOTE: all heavy tasks and functionalities are done for this project, but wiring them up on the controller and testing is pending... *
+*NOTE: all heavy tasks and functionalities are done for this project, but wiring them up on the controller and testing is pending...*
 
 1. Go to project root folder 
 
