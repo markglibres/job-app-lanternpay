@@ -6,6 +6,7 @@ using Lantern.Api.Application.Lectures.Commands;
 using Lantern.Api.Application.Students.Commands;
 using Lantern.Api.Application.Subjects.Commands;
 using Lantern.Api.Application.Subjects.Queries;
+using Lantern.Api.Application.Subjects.ResponseModels;
 using Lantern.Domain.Lectures;
 using Lantern.Domain.Students;
 using Lantern.Domain.Subjects;
@@ -55,14 +56,16 @@ namespace Lantern.Api.Controllers
         [HttpPost]
         [Route("{Id}/lectures")]
         [ProducesResponseType(typeof(Lecture), (int) HttpStatusCode.OK)]
-        public async Task<IActionResult> CreateLecture(CreateLectureCommand command)
+        public async Task<IActionResult> CreateLecture(Guid id, CreateLectureCommand command)
         {
-            return Ok();
+            command.Id = id;
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
 
         [HttpGet]
         [Route("{Id}/lectures")]
-        [ProducesResponseType(typeof(GetLecturesBySubjectIdQueryModel), (int) HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(SubjectLecturesResponseModel), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetLecturesBySubject(GetLecturesBySubjectIdQuery query)
         {
             return Ok();

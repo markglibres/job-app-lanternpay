@@ -1,6 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Lantern.Api.Application.Enrollments.Commands.Handlers;
+using Lantern.Core.Services.Subjects.Exceptions;
 using Lantern.Domain.Subjects.Services;
 using MediatR;
 
@@ -17,7 +18,8 @@ namespace Lantern.Api.Application.Subjects.Queries.Handlers
         
         public async Task<GetStudentsBySubjectIdQueryModel> Handle(GetStudentsBySubjectIdQuery request, CancellationToken cancellationToken)
         {
-            if(!await _subjectService.IsExists(request.Id)) throw new SubjectDoesNotExistsException();
+            if(!await _subjectService.IsExists(request.Id)) 
+                throw new SubjectIdDoesNotExistsException(request.Id.ToString());
 
             var subject = await _subjectService.GetById(request.Id);
             

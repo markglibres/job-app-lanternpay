@@ -1,13 +1,16 @@
 using System;
+using Lantern.Api.Application.Lectures.ResponseModels;
 using Lantern.Domain.Lectures;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Lantern.Api.Application.Lectures.Commands
 {
-    public class CreateLectureCommand : IRequest<Lecture>
+    public class CreateLectureCommand : IRequest<LectureResponseModel>
     {
-        [FromQuery]
+        [JsonIgnore]
+        [FromRoute]
         public Guid Id { get; set; }
         [FromBody]
         public DayOfWeek DayOfWeek { get; set; }

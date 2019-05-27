@@ -1,6 +1,10 @@
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using Lantern.Api.Application.Enrollments.Commands.Handlers;
+using Lantern.Api.Application.Lectures.ResponseModels;
+using Lantern.Core.Services.Lectures.Exceptions;
+using Lantern.Core.Services.Subjects.Exceptions;
 using Lantern.Domain.Lectures;
 using Lantern.Domain.Lectures.Services;
 using Lantern.Domain.Subjects.Services;
@@ -8,22 +12,29 @@ using MediatR;
 
 namespace Lantern.Api.Application.Lectures.Commands.Handlers
 {
-    public class CreateLectureCommandHandler : IRequestHandler<CreateLectureCommand, Lecture>
+    public class CreateLectureCommandHandler : IRequestHandler<CreateLectureCommand, LectureResponseModel>
     {
         private readonly ILectureTheatreService _lectureTheatreService;
+        private readonly IMapper _mapper;
         private readonly ISubjectService _subjectService;
 
         public CreateLectureCommandHandler(
+            IMapper mapper,
             ISubjectService subjectService,
             ILectureTheatreService lectureTheatreService)
         {
+            _mapper = mapper;
             _subjectService = subjectService;
             _lectureTheatreService = lectureTheatreService;
         }
 
-        public async Task<Lecture> Handle(CreateLectureCommand request, CancellationToken cancellationToken)
+        public async Task<LectureResponseModel> Handle(CreateLectureCommand request, CancellationToken cancellationToken)
         {
-            if (!await _subjectService.IsExists(request.Id)) throw new SubjectDoesNotExistsException();
+            if (!await _subjectService.IsExists(request.Id)) 
+                throw new SubjectIdDoesNotExistsException(request.Id.ToString());
+
+            if (!await _lectureTheatreService.IsExists(request.LectureTheatreId))
+                throw new LectureTheatreIdDoesNotExistsException(request.LectureTheatreId.ToString());
 
             var subject = await _subjectService.GetById(request.Id);
             var lectureTheatreId = await _lectureTheatreService.GetById(request.LectureTheatreId);
@@ -36,7 +47,9 @@ namespace Lantern.Api.Application.Lectures.Commands.Handlers
 
             await _subjectService.Save(subject);
 
-            return lecture;
+            var response = _mapper.Map<LectureResponseModel>(lecture);
+
+            return response;
         }
     }
 }

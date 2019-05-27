@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Lantern.Core.Services.Lectures.Exceptions;
 using Lantern.Domain.Lectures;
 using Lantern.Domain.Lectures.Services;
 using Lantern.Domain.SeedWork;
-using Lantern.Core.Services.LectureTheatres.Exceptions;
 
-namespace Lantern.Core.Services.LectureTheatres
+namespace Lantern.Core.Services.Lectures
 {
     public class LectureTheatreService : ILectureTheatreService
     {
@@ -26,6 +26,11 @@ namespace Lantern.Core.Services.LectureTheatres
 
             return result.Any();
 
+        }
+
+        public async Task<bool> IsExists(Guid id)
+        {
+            return await _repository.IsExists(id);
         }
 
         public async Task<LectureTheatre> Create(string name, int capacity)

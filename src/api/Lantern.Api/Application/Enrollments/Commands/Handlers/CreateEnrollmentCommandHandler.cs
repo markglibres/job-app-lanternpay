@@ -1,6 +1,8 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Lantern.Core.Services.Students.Exceptions;
+using Lantern.Core.Services.Subjects.Exceptions;
 using Lantern.Domain.Students.Services;
 using Lantern.Domain.Subjects.Services;
 using MediatR;
@@ -21,9 +23,11 @@ namespace Lantern.Api.Application.Enrollments.Commands.Handlers
         }
         public async Task<CreateEnrollmentCommandModel> Handle(CreateEnrollmentCommand request, CancellationToken cancellationToken)
         {
-            if (!await _studentService.IsExists(request.StudentId)) throw new StudentDoesNotExistsException();
+            if (!await _studentService.IsExists(request.StudentId)) 
+                throw new StudentIdDoesNotExistsException(request.StudentId.ToString());
 
-            if (!await _subjectService.IsExists(request.SubjectId)) throw new SubjectDoesNotExistsException();
+            if (!await _subjectService.IsExists(request.SubjectId)) 
+                throw new SubjectIdDoesNotExistsException(request.SubjectId.ToString());
 
             var subject = await _subjectService.GetById(request.SubjectId);
             var student = await _studentService.GetById(request.StudentId);
@@ -35,11 +39,7 @@ namespace Lantern.Api.Application.Enrollments.Commands.Handlers
         }
     }
 
-    public class SubjectDoesNotExistsException : Exception
-    {
-    }
+    
 
-    public class StudentDoesNotExistsException : Exception
-    {
-    }
+    
 }

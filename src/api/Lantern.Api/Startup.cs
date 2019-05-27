@@ -37,6 +37,7 @@ namespace Lantern.Api
             services.ConfigureDocumentStore(Configuration);
             services.AddMediatR(typeof(Startup).Assembly);
             services.ConfigureLanternServices();
+            services.ConfigureMapper();
 
         }
 

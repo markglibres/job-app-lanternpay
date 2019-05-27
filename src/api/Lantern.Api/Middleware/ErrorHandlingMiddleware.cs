@@ -43,11 +43,11 @@ namespace Lantern.Api.Middleware
             var error = new
             {
                 Message = message,
-                StatusCode = (int) HttpStatusCode.BadRequest
+                StatusCode = (int) httpStatusCode
             };
                 
             context.Response.ContentType = "application/vnd.api+json";
-            context.Response.StatusCode = (int) HttpStatusCode.BadRequest;
+            context.Response.StatusCode = (int) httpStatusCode;
             return context.Response.WriteAsync(JsonConvert.SerializeObject(error));
         }
     }

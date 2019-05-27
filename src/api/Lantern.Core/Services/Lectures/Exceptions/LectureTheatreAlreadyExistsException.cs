@@ -1,7 +1,6 @@
-using System;
 using Lantern.Core.SeedWork;
 
-namespace Lantern.Core.Services.LectureTheatres.Exceptions
+namespace Lantern.Core.Services.Lectures.Exceptions
 {
     public class LectureTheatreAlreadyExistsException : BusinessException
     {
