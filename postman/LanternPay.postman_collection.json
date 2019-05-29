@@ -185,7 +185,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"dayOfWeek\": 0,\n  \"startTime\": \"2019-05-27T11:47:58.210Z\",\n  \"endTime\": \"2019-05-27T11:47:58.210Z\",\n  \"lectureTheatreId\": \"{{theatreId}}\"\n}"
+					"raw": "{\n  \"dayOfWeek\": 0,\n  \"startTime\": \"2019-05-27T11:47:58.210Z\",\n  \"endTime\": \"2019-05-27T12:47:58.210Z\",\n  \"lectureTheatreId\": \"{{theatreId}}\"\n}"
 				},
 				"url": {
 					"raw": "{{url}}/subjects/{{subjectId}}/lectures",
@@ -234,14 +234,14 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{url}}/subjects/{{subjectId}}/lectures",
+					"raw": "{{url}}/subjects/{{subjectId}}/students",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"subjects",
 						"{{subjectId}}",
-						"lectures"
+						"students"
 					]
 				}
 			},
@@ -331,7 +331,42 @@
 			"response": []
 		},
 		{
+			"name": "Get Subjects by student id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/students/{{studentId}}/enrollments",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"students",
+						"{{studentId}}",
+						"enrollments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Enroll",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a092068b-4bdb-482a-85b9-ba98a327a426",
+						"exec": [
+							"pm.environment.set('applicationId',pm.response.json().applicationId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -375,6 +410,34 @@
 					"path": [
 						"enrollments",
 						"{{applicationId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Enrollments",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/enrollments",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"enrollments"
 					]
 				}
 			},
