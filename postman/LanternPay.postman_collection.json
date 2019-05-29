@@ -334,6 +334,28 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get Enrollment By Application Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/enrollments/{{applicationId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"enrollments",
+						"{{applicationId}}"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

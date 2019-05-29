@@ -1,6 +1,8 @@
+using System;
 using System.Net;
 using System.Threading.Tasks;
 using Lantern.Api.Application.Enrollments.Commands;
+using Lantern.Api.Application.Enrollments.Queries;
 using Lantern.Api.Application.Enrollments.ResponseModels;
 using Lantern.Domain.Enrollments;
 using Lantern.Domain.Enrollments.Services;
@@ -29,5 +31,15 @@ namespace Lantern.Api.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet]
+        [Route("{ApplicationId}")]
+        [ProducesResponseType(typeof(EnrollmentResponseModel), (int) HttpStatusCode.OK)]
+        public async Task<IActionResult> EnrollmentStatus([FromRoute] GetEnrollmentByApplicationIdQuery query)
+        {
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+        
     }
 }
