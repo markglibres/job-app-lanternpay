@@ -6,94 +6,19 @@
 	},
 	"item": [
 		{
-			"name": "Get All Lecture Theatres",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "{{url}}/lecturetheatres",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"lecturetheatres"
-					]
+			"name": "Create Lecture Theatre",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0ea9c477-c414-4856-8252-f5551ecd64a1",
+						"exec": [
+							"pm.environment.set('theatreId',pm.response.json().id);"
+						],
+						"type": "text/javascript"
+					}
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get All Subjects",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "{{url}}/subjects",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"subjects"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Lectures by Subject Id",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "{{url}}/subjects/{{subjectId}}/lectures",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"subjects",
-						"{{subjectId}}",
-						"lectures"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Subject by Id",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "{{url}}/subjects/{{subjectId}}",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"subjects",
-						"{{subjectId}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create Lecture on a subject",
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -106,17 +31,15 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"dayOfWeek\": 0,\n  \"startTime\": \"2019-05-27T11:47:58.210Z\",\n  \"endTime\": \"2019-05-27T11:47:58.210Z\",\n  \"lectureTheatreId\": \"{{theatreId}}\"\n}"
+					"raw": "{\n  \"name\": \"Theatre2\",\n  \"capacity\": 50\n}"
 				},
 				"url": {
-					"raw": "{{url}}/subjects/{{subjectId}}/lectures",
+					"raw": "{{url}}/lecturetheatres",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"subjects",
-						"{{subjectId}}",
-						"lectures"
+						"lecturetheatres"
 					]
 				}
 			},
@@ -145,32 +68,13 @@
 			"response": []
 		},
 		{
-			"name": "Create Lecture Theatre",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "0ea9c477-c414-4856-8252-f5551ecd64a1",
-						"exec": [
-							"pm.environment.set('theatreId',pm.response.json().id);"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
+			"name": "Get All Lecture Theatres",
 			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
+				"method": "GET",
+				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"name\": \"Theatre2\",\n  \"capacity\": 50\n}"
+					"raw": ""
 				},
 				"url": {
 					"raw": "{{url}}/lecturetheatres",
@@ -225,9 +129,145 @@
 			"response": []
 		},
 		{
-			"name": "Create Student",
+			"name": "Get Subject by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/subjects/{{subjectId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"subjects",
+						"{{subjectId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Subjects",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/subjects",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"subjects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Lecture on a subject",
 			"request": {
 				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"dayOfWeek\": 0,\n  \"startTime\": \"2019-05-27T11:47:58.210Z\",\n  \"endTime\": \"2019-05-27T11:47:58.210Z\",\n  \"lectureTheatreId\": \"{{theatreId}}\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/subjects/{{subjectId}}/lectures",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"subjects",
+						"{{subjectId}}",
+						"lectures"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Lectures by Subject Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/subjects/{{subjectId}}/lectures",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"subjects",
+						"{{subjectId}}",
+						"lectures"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3fdf4028-8178-45dd-a6ed-449a10eca6b9",
+						"exec": [
+							"pm.environment.set('studentId',pm.response.json().id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Mark\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/students",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Students",
+			"request": {
+				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -240,6 +280,28 @@
 					],
 					"path": [
 						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Student by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/students/{{studentId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"students",
+						"{{studentId}}"
 					]
 				}
 			},
