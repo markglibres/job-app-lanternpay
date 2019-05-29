@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Lantern.Api.Application.Lectures.Commands;
+using Lantern.Api.Application.Lectures.ResponseModels;
 using Lantern.Api.Application.Students.Commands;
 using Lantern.Api.Application.Subjects.Commands;
 using Lantern.Api.Application.Subjects.Queries;
@@ -27,7 +28,7 @@ namespace Lantern.Api.Controllers
         }
         
         [HttpPost]
-        [ProducesResponseType(typeof(Subject), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(SubjectResponseModel), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Create([FromBody] CreateSubjectCommand command)
         {
             var result = await _mediator.Send(command);
@@ -36,7 +37,7 @@ namespace Lantern.Api.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<Subject>), (int) HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<SubjectResponseModel>), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetAll()
         {
             var result = await _mediator.Send(new GetSubjectsQuery());
@@ -46,7 +47,7 @@ namespace Lantern.Api.Controllers
 
         [HttpGet]
         [Route("{Id}")]
-        [ProducesResponseType(typeof(Subject),(int) HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(SubjectResponseModel),(int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetById([FromRoute] GetSubjectByIdQuery query)
         {
             var result = await _mediator.Send(query);
@@ -55,7 +56,7 @@ namespace Lantern.Api.Controllers
 
         [HttpPost]
         [Route("{Id}/lectures")]
-        [ProducesResponseType(typeof(Lecture), (int) HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(LectureResponseModel), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> CreateLecture(Guid id, CreateLectureCommand command)
         {
             command.Id = id;

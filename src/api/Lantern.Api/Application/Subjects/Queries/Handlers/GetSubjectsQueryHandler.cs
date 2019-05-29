@@ -18,20 +18,17 @@ namespace Lantern.Api.Application.Subjects.Queries.Handlers
     public class GetSubjectsQueryHandler : IRequestHandler<GetSubjectsQuery, IEnumerable<SubjectResponseModel>>
     {
         private readonly IMapper _mapper;
-        private readonly IEntityMapperService<SubjectResponseModel> _entityMapperService;
+        private readonly IEntityMapperService<SubjectResponseModel> _subjectMapperService;
         private readonly ISubjectService _subjectService;
-        private readonly ILectureTheatreService _lectureTheatreService;
 
         public GetSubjectsQueryHandler(
             IMapper mapper,
-            IEntityMapperService<SubjectResponseModel> entityMapperService,
-            ISubjectService subjectService,
-            ILectureTheatreService lectureTheatreService)
+            IEntityMapperService<SubjectResponseModel> subjectMapperService,
+            ISubjectService subjectService)
         {
             _mapper = mapper;
-            _entityMapperService = entityMapperService;
+            _subjectMapperService = subjectMapperService;
             _subjectService = subjectService;
-            _lectureTheatreService = lectureTheatreService;
         }
         
         public async Task<IEnumerable<SubjectResponseModel>> Handle(GetSubjectsQuery request, CancellationToken cancellationToken)
@@ -42,7 +39,7 @@ namespace Lantern.Api.Application.Subjects.Queries.Handlers
                 .Map<IEnumerable<SubjectResponseModel>>(subjects)
                 .ToList();
 
-            var mappedResponse = await _entityMapperService.Map(response);
+            var mappedResponse = await _subjectMapperService.Map(response);
                 
             return mappedResponse;
         }

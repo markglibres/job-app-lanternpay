@@ -1,12 +1,13 @@
 using System;
+using Lantern.Api.Application.Students.ResponseModels;
 using Lantern.Domain.Students;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lantern.Api.Application.Students.Queries
 {
-    public class GetStudentByIdQuery : IRequest<Student>
+    public class GetStudentByIdQuery : IRequest<StudentResponseModel>
     {
-        [FromQuery] public Guid Id { get; set; }
+        [FromRoute] public Guid Id { get; set; }
     }
 }

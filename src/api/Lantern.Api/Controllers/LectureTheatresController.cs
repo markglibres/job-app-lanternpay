@@ -4,6 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Lantern.Api.Application.Lectures.Commands;
 using Lantern.Api.Application.Lectures.Queries;
+using Lantern.Api.Application.Lectures.ResponseModels;
 using Lantern.Api.Application.Subjects.Commands;
 using Lantern.Domain.Lectures;
 using MediatR;
@@ -23,7 +24,7 @@ namespace Lantern.Api.Controllers
         }
         
         [HttpPost]
-        [ProducesResponseType(typeof(LectureTheatre), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(LectureTheatreResponseModel), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Create([FromBody] CreateLectureTheatreCommand command)
         {
             var result = await _mediator.Send(command);
@@ -32,7 +33,7 @@ namespace Lantern.Api.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<LectureTheatre>), (int) HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<LectureTheatreResponseModel>), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetAll()
         {
             var result = await _mediator.Send(new GetLectureTheatresQuery());
@@ -42,7 +43,7 @@ namespace Lantern.Api.Controllers
 
         [HttpGet]
         [Route("{Id}")]
-        [ProducesResponseType(typeof(LectureTheatre),(int) HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(LectureTheatreResponseModel),(int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetById([FromRoute] GetLectureTheatreByIdQuery query)
         {
             var result = await _mediator.Send(query);

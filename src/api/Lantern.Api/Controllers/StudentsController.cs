@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Lantern.Api.Application.Students.Commands;
 using Lantern.Api.Application.Students.Queries;
+using Lantern.Api.Application.Students.ResponseModels;
 using Lantern.Domain.Students;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,7 @@ namespace Lantern.Api.Controllers
         }
         
         [HttpPost]
-        [ProducesResponseType(typeof(Student), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(StudentResponseModel), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Create([FromBody] CreateStudentCommand command)
         {
             var result = await _mediator.Send(command);
@@ -33,22 +34,24 @@ namespace Lantern.Api.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<Student>), (int) HttpStatusCode.OK)]
-        public async Task<IActionResult> GetAll(GetStudentsQuery query)
+        [ProducesResponseType(typeof(IEnumerable<StudentResponseModel>), (int) HttpStatusCode.OK)]
+        public async Task<IActionResult> GetAll()
         {
-            return Ok();
+            var result = await _mediator.Send(new GetStudentsQuery());
+            return Ok(result);
         }
 
         [HttpGet]
-        [Route("{id}")]
-        [ProducesResponseType(typeof(Student),(int) HttpStatusCode.OK)]
-        public async Task<IActionResult> GetById(GetStudentByIdQuery query)
+        [Route("{Id}")]
+        [ProducesResponseType(typeof(StudentResponseModel),(int) HttpStatusCode.OK)]
+        public async Task<IActionResult> GetById([FromRoute] GetStudentByIdQuery query)
         {
-            return Ok();
+            var result = await _mediator.Send(query);
+            return Ok(result);
         }
 
         [HttpGet]
-        [Route("{id}/enrollments")]
+        [Route("{Id}/enrollments")]
         [ProducesResponseType(typeof(GetEnrollmentsByStudentIdQueryModel), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetEnrollmentsByStudent(GetEnrollmentsByStudentIdQuery query)
         {
