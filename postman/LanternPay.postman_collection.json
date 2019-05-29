@@ -36,6 +36,21 @@
 			"response": []
 		},
 		{
+			"name": "Get Lectures by Subject Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get Subject by Id",
 			"request": {
 				"method": "GET",

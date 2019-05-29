@@ -11,13 +11,13 @@ using MediatR;
 
 namespace Lantern.Api.Application.Subjects.Queries.Handlers
 {
-    public class GetLecturesQueryHandler : IRequestHandler<GetLecturesBySubjectIdQuery, SubjectLecturesResponseModel>
+    public class GetLecturesBySubjectIdQueryHandler : IRequestHandler<GetLecturesBySubjectIdQuery, SubjectLecturesResponseModel>
     {
         private readonly IMapper _mapper;
         private readonly IEntityMapperService<LectureResponseModel> _entityMapperService;
         private readonly ISubjectService _subjectService;
 
-        public GetLecturesQueryHandler(
+        public GetLecturesBySubjectIdQueryHandler(
             IMapper mapper,
             IEntityMapperService<LectureResponseModel> entityMapperService,
             ISubjectService subjectService)
