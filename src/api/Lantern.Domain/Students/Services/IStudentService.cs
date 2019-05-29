@@ -10,6 +10,6 @@ namespace Lantern.Domain.Students.Services
         Task Save(Student student);
         Task<IEnumerable<Student>> GetAll();
         Task<bool> IsExists(Guid studentId);
-        Task<Student> GetById(Guid requestStudentId);
+        Task<Student> GetById(Guid studentId);
     }
 }

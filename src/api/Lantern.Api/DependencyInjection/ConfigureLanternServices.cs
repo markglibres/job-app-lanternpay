@@ -3,6 +3,7 @@ using Lantern.Api.Application.Mappers.Services;
 using Lantern.Api.Application.Subjects.ResponseModels;
 using Lantern.Core.SeedWork;
 using Lantern.Core.Services.Lectures;
+using Lantern.Core.Services.Students;
 using Lantern.Core.Services.Subjects;
 using Lantern.Domain.Enrollments;
 using Lantern.Domain.Lectures;
@@ -20,15 +21,17 @@ namespace Lantern.Api.DependencyInjection
     {
         public static IServiceCollection ConfigureLanternServices(this IServiceCollection services)
         {
-            
+
             services
                 .AddTransient<IRepository<Student>, Repository<Student>>()
                 .AddTransient<IRepository<Subject>, Repository<Subject>>()
                 .AddTransient<IRepository<LectureTheatre>, Repository<LectureTheatre>>()
-                .AddTransient<IRepository<Enrollment>, Repository<Enrollment>>()
-                .AddTransient<ISubjectService, SubjectService>();
+                .AddTransient<IRepository<Enrollment>, Repository<Enrollment>>();
+                
 
-            services.AddTransient<ILectureTheatreService, LectureTheatreService>();
+            services.AddTransient<ILectureTheatreService, LectureTheatreService>()
+                .AddTransient<IStudentService, StudentService>()
+                .AddTransient<ISubjectService, SubjectService>();
 
             services
                 .AddTransient<IEntityMapperService<LectureResponseModel>, LectureEntityMapperService>()

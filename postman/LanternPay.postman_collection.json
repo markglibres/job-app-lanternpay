@@ -15,7 +15,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": ""
+					"raw": "{{url}}/lecturetheatres",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"lecturetheatres"
+					]
 				}
 			},
 			"response": []
@@ -30,7 +36,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": ""
+					"raw": "{{url}}/subjects",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"subjects"
+					]
 				}
 			},
 			"response": []
@@ -45,7 +57,15 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": ""
+					"raw": "{{url}}/subjects/{{subjectId}}/lectures",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"subjects",
+						"{{subjectId}}",
+						"lectures"
+					]
 				}
 			},
 			"response": []
@@ -60,7 +80,14 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": ""
+					"raw": "{{url}}/subjects/{{subjectId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"subjects",
+						"{{subjectId}}"
+					]
 				}
 			},
 			"response": []
@@ -68,14 +95,29 @@
 		{
 			"name": "Create Lecture on a subject",
 			"request": {
-				"method": "GET",
-				"header": [],
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": ""
+					"raw": "{\n  \"dayOfWeek\": 0,\n  \"startTime\": \"2019-05-27T11:47:58.210Z\",\n  \"endTime\": \"2019-05-27T11:47:58.210Z\",\n  \"lectureTheatreId\": \"{{theatreId}}\"\n}"
 				},
 				"url": {
-					"raw": ""
+					"raw": "{{url}}/subjects/{{subjectId}}/lectures",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"subjects",
+						"{{subjectId}}",
+						"lectures"
+					]
 				}
 			},
 			"response": []
@@ -90,37 +132,115 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": ""
+					"raw": "{{url}}/lecturetheatres/{{theatreId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"lecturetheatres",
+						"{{theatreId}}"
+					]
 				}
 			},
 			"response": []
 		},
 		{
 			"name": "Create Lecture Theatre",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0ea9c477-c414-4856-8252-f5551ecd64a1",
+						"exec": [
+							"pm.environment.set('theatreId',pm.response.json().id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
-				"method": "GET",
-				"header": [],
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": ""
+					"raw": "{\n  \"name\": \"Theatre2\",\n  \"capacity\": 50\n}"
 				},
 				"url": {
-					"raw": ""
+					"raw": "{{url}}/lecturetheatres",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"lecturetheatres"
+					]
 				}
 			},
 			"response": []
 		},
 		{
 			"name": "Create Subject",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "486ac3f9-3d1a-4a9f-9fde-73d4fa0f74f5",
+						"exec": [
+							"pm.environment.set('subjectId',pm.response.json().id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
-				"method": "GET",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Physics 102\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/subjects",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"subjects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Student",
+			"request": {
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": ""
 				},
 				"url": {
-					"raw": ""
+					"raw": "{{url}}/students",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"students"
+					]
 				}
 			},
 			"response": []

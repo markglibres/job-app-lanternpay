@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using AutoMapper;
 using Lantern.Api.Application.Students.Commands;
 using Lantern.Api.Application.Students.Queries;
 using Lantern.Domain.Students;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lantern.Api.Controllers
@@ -13,11 +15,21 @@ namespace Lantern.Api.Controllers
     [ApiController]
     public class StudentsController : Controller
     {
+        private readonly IMediator _mediator;
+
+
+        public StudentsController(
+            IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+        
         [HttpPost]
         [ProducesResponseType(typeof(Student), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Create([FromBody] CreateStudentCommand command)
         {
-            return Ok();
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
 
         [HttpGet]

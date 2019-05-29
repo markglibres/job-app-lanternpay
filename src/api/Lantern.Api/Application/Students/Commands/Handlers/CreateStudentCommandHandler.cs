@@ -1,30 +1,36 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Lantern.Api.Application.Students.Exceptions;
+using AutoMapper;
+using Lantern.Api.Application.Students.ResponseModels;
+using Lantern.Core.Services.Students.Exceptions;
 using Lantern.Domain.Students;
 using Lantern.Domain.Students.Services;
 using MediatR;
 
 namespace Lantern.Api.Application.Students.Commands.Handlers
 {
-    public class CreateStudentCommandHandler : IRequestHandler<CreateStudentCommand, Student>
+    public class CreateStudentCommandHandler : IRequestHandler<CreateStudentCommand, StudentResponseModel>
     {
+        private readonly IMapper _mapper;
         private readonly IStudentService _studentService;
 
-        public CreateStudentCommandHandler(IStudentService studentService)
+        public CreateStudentCommandHandler(
+            IMapper mapper,
+            IStudentService studentService)
         {
+            _mapper = mapper;
             _studentService = studentService;
         }
 
-        public async Task<Student> Handle(CreateStudentCommand request, CancellationToken cancellationToken)
+        public async Task<StudentResponseModel> Handle(CreateStudentCommand request, CancellationToken cancellationToken)
         {
-            if (string.IsNullOrWhiteSpace(request.Name)) throw new StudentMissingNameException(request.Name);
-
             var student = await _studentService.Create(request.Name);
 
             await _studentService.Save(student);
+            
+            var model = _mapper.Map<StudentResponseModel>(student);
 
-            return student;
+            return model;
         }
     }
 }

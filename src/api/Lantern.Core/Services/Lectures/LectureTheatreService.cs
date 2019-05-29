@@ -39,8 +39,6 @@ namespace Lantern.Core.Services.Lectures
             
             var theatre = new LectureTheatre(name, capacity);
 
-            await Save(theatre);
-
             return theatre;
         }
 
