@@ -75,10 +75,11 @@ namespace Lantern.Api.Controllers
 
         [HttpGet]
         [Route("{Id}/students")]
-        [ProducesResponseType(typeof(GetStudentsBySubjectIdQueryModel), (int) HttpStatusCode.OK)]
-        public async Task<IActionResult> GetStudentsBySubject(GetStudentsBySubjectIdQuery query)
+        [ProducesResponseType(typeof(GetStudentsBySubjectIdQueryResponseModel), (int) HttpStatusCode.OK)]
+        public async Task<IActionResult> GetStudentsBySubject([FromRoute] GetStudentsBySubjectIdQuery query)
         {
-            return Ok();
+            var result = await _mediator.Send(query);
+            return Ok(result);
         }
     }
 }

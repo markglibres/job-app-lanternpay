@@ -225,6 +225,29 @@
 			"response": []
 		},
 		{
+			"name": "Get Students by Subject Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/subjects/{{subjectId}}/lectures",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"subjects",
+						"{{subjectId}}",
+						"lectures"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Create Student",
 			"event": [
 				{
