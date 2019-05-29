@@ -116,5 +116,10 @@ namespace Lantern.Core.Services.Enrollments
 
             return totalHours;
         }
+
+        public async Task<IEnumerable<Enrollment>> GetAll()
+        {
+            return await _repository.FindAll();
+        }
     }
 }

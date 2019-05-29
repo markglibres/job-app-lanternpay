@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Lantern.Api.Application.Enrollments.Commands;
 using Lantern.Api.Application.Enrollments.Queries;
 using Lantern.Api.Application.Enrollments.ResponseModels;
+using Lantern.Api.Application.Students.Queries;
 using Lantern.Domain.Enrollments;
 using Lantern.Domain.Enrollments.Services;
 using MediatR;
@@ -38,6 +40,14 @@ namespace Lantern.Api.Controllers
         public async Task<IActionResult> EnrollmentStatus([FromRoute] GetEnrollmentByApplicationIdQuery query)
         {
             var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+        
+        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<EnrollmentResponseModel>), (int) HttpStatusCode.OK)]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _mediator.Send(new GetEnrollmentsQuery());
             return Ok(result);
         }
         

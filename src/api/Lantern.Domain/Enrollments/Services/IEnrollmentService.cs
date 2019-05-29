@@ -21,5 +21,6 @@ namespace Lantern.Domain.Enrollments.Services
         Task<bool> ExceedsStudentHours(Guid subjectId, Guid studentId);
         Task<Enrollment> GetByApplicationId(Guid applicationId);
         Task<double> GetStudentHours(Guid studentId);
+        Task<IEnumerable<Enrollment>> GetAll();
     }
 }
