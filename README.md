@@ -10,8 +10,6 @@
 
 **How to run API with docker**
 
-*NOTE: all heavy tasks and functionalities are done for this project, but wiring them up on the controller and testing is pending...*
-
 1. Go to project root folder 
 
 2. Build docker
@@ -44,16 +42,20 @@ p: password
 
 **Testing using Postman collection**
 
+
 1. Import postman collections found at /postman/LanternPay.postman_collection.json
 2. Import postman environment variables at /postman/LanternPay.postman_environment.json
 
-*Collections*
-1. Create Lecture Theatre
-2. Create subject
-3. Get all lecture theatres
-4. Get all subjects
-5. Get subject by id => "subjectId" variable gets populated automatically after calling "Create Subject"
-6. Get lecture theatres by id => "theatreId" variable gets populated automatically after calling "Create Lecture Theatre"
+*Note: All postman collections are configured with a test data.*
+
+*Collections to be executed in order:*
+1. Create Lecture Theatre = automatically populates postman variable "lectureTheatreId"
+2. Create subject = automatically populates postman variable "subjectId"
+3. Create lecture on a subject = automatically uses variables on #1 and #2
+4. Create student = automatically populates postman variable "studentId"
+5. Enroll = automatically populates postman variable "applicationId" and uses variables for student and subject
+
+*All other postman collections can be accessed at any order and time (depending on the values of variables used)*
 
 **How to debug API**
 
