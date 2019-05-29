@@ -3,6 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Lantern.Api.Application.Enrollments.Commands.Handlers;
+using Lantern.Api.Application.Lectures.ResponseModels;
+using Lantern.Api.Application.Mappers.Services;
 using Lantern.Api.Application.Students.ResponseModels;
 using Lantern.Api.Application.Subjects.ResponseModels;
 using Lantern.Core.Services.Students.Exceptions;
@@ -19,15 +21,18 @@ namespace Lantern.Api.Application.Students.Queries.Handlers
         private readonly IMapper _mapper;
         private readonly IStudentService _studentService;
         private readonly ISubjectService _subjectService;
+        private readonly IEntityMapperService<LectureResponseModel> _lectureEntityMapperService;
 
         public GetEnrollmentsByStudentIdQueryHandler(
             IMapper mapper,
             IStudentService studentService,
-            ISubjectService subjectService)
+            ISubjectService subjectService,
+            IEntityMapperService<LectureResponseModel> lectureEntityMapperService)
         {
             _mapper = mapper;
             _studentService = studentService;
             _subjectService = subjectService;
+            _lectureEntityMapperService = lectureEntityMapperService;
         }
 
         public async Task<GetEnrollmentsByStudentIdQueryResponseModel> Handle(GetEnrollmentsByStudentIdQuery request,
@@ -45,6 +50,11 @@ namespace Lantern.Api.Application.Students.Queries.Handlers
                 Name = student.Name,
                 Subjects = _mapper.Map<IEnumerable<SubjectLecturesResponseModel>>(subjects)
             };
+
+            foreach (var subject in response.Subjects)
+            {
+                subject.Lectures = await _lectureEntityMapperService.Map(subject.Lectures);
+            }
 
             return response;
         }
