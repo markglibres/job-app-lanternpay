@@ -1,5 +1,17 @@
 # LanternPay - Programming Exercise
 
+A simple demonstration for the following:
+
+* dotnetcore C#
+* Dependency Injection (IoC - Inversion of Control)
+* DDD
+* Event Driven Design (using MediatR)
+* Service Layer Pattern
+* Repository Pattern (PostgreSQL Jsonb using Marten)
+* CQRS
+* Docker
+* RESTful API (did not apply jsonapi standard due to time constraints)
+
 **References / Inspiration for the patterns and designs used on this project**
 
 [The Ideal Domain-Driven Design Aggregate Store](https://kalele.io/the-ideal-domain-driven-design-aggregate-store/)
@@ -7,6 +19,20 @@
 [Dependency Injection in .Net](http://sd.blackball.lv/library/Dependency_Injection_in_.NET_(2011).pdf)
 
 [Microsoft eShop](https://github.com/dotnet-architecture/eShopOnContainers)
+
+**Project Structure**
+1. API
+
+   * Lantern.API = Application Layer
+   * Lantern.Core = Implementation Layer
+   * Lantern.Domain = Domain Layer
+
+2. File
+    * Lantern.File = revert file console app
+
+3. Tests
+    * Lantern.File.Test = file console unit tests
+    * Lantern.File.Api = unit test for API (skipped due to time constraints)
 
 **How to run API with docker**
 
