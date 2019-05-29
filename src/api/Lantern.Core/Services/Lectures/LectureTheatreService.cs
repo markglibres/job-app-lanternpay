@@ -58,5 +58,11 @@ namespace Lantern.Core.Services.Lectures
         {
             return _repository.FindByIdAsync(requestLectureTheatreId);
         }
+
+        public async Task<IEnumerable<LectureTheatre>> GetById(IEnumerable<Guid> theatreIds)
+        {
+            return await _repository.FindByIdAsync(theatreIds);
+
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Lantern.Api.Application.Enrollments.Commands.Handlers;
 using Lantern.Api.Application.Lectures.ResponseModels;
+using Lantern.Api.Application.Mappers.Services;
 using Lantern.Core.Services.Lectures.Exceptions;
 using Lantern.Core.Services.Subjects.Exceptions;
 using Lantern.Domain.Lectures;
@@ -15,17 +16,20 @@ namespace Lantern.Api.Application.Lectures.Commands.Handlers
     public class CreateLectureCommandHandler : IRequestHandler<CreateLectureCommand, LectureResponseModel>
     {
         private readonly ILectureTheatreService _lectureTheatreService;
+        private readonly IEntityMapperService<LectureResponseModel> _entityMapperService;
         private readonly IMapper _mapper;
         private readonly ISubjectService _subjectService;
 
         public CreateLectureCommandHandler(
             IMapper mapper,
             ISubjectService subjectService,
-            ILectureTheatreService lectureTheatreService)
+            ILectureTheatreService lectureTheatreService,
+            IEntityMapperService<LectureResponseModel> entityMapperService)
         {
             _mapper = mapper;
             _subjectService = subjectService;
             _lectureTheatreService = lectureTheatreService;
+            _entityMapperService = entityMapperService;
         }
 
         public async Task<LectureResponseModel> Handle(CreateLectureCommand request, CancellationToken cancellationToken)
@@ -49,7 +53,7 @@ namespace Lantern.Api.Application.Lectures.Commands.Handlers
 
             var response = _mapper.Map<LectureResponseModel>(lecture);
 
-            return response;
+            return await _entityMapperService.Map(response);
         }
     }
 }

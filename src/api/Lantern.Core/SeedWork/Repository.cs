@@ -30,6 +30,26 @@ namespace Lantern.Core.SeedWork
             }
         }
 
+        public async Task<IEnumerable<T>> FindByIdAsync(IEnumerable<Guid> entityIds)
+        {
+            var ids = entityIds.ToList();
+            
+            var entities = new List<T>();
+            
+            if(!ids?.Any() ?? true) return entities;
+            
+            //due to a bug in Marten, we can't fetch multiple using list.contains on query
+            //so let's iterate for now
+            
+            var tasks = new List<Task<T>>();
+            
+            ids.ForEach(id => tasks.Add(FindByIdAsync(id)));
+
+            entities.AddRange(await Task.WhenAll(tasks));
+
+            return entities;
+        }
+
         public async Task<IEnumerable<T>> FindByPredicate(Expression<Func<T, bool>> predicate)
         {
             using (var session = _documentStore.OpenSession())

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Lantern.Api.Application.Lectures.ResponseModels;
@@ -31,9 +32,23 @@ namespace Lantern.Api.Application.Mappers.Services
 
         public async Task<IEnumerable<LectureResponseModel>> Map(IEnumerable<LectureResponseModel> lectures)
         {
-            var mappedLectures = new List<LectureResponseModel>();
+            var mappedLectures = lectures.ToList();
+            
+            var theatreIds = mappedLectures
+                .ToList()
+                .Select(_ => Guid.Parse(_.LectureTheatre.Id))
+                .ToList();
 
-            foreach (var responseModel in lectures) mappedLectures.Add(await Map(responseModel));
+            var theatres = (await _lectureTheatreService
+                    .GetById(theatreIds))
+                .ToList();
+
+            foreach (var responseModel in mappedLectures)
+            {
+                var theatreId = responseModel.LectureTheatre.Id;
+                var theatre = theatres.FirstOrDefault(_ => _.Id.ToString() == theatreId);
+                responseModel.LectureTheatre = _mapper.Map<LectureTheatreResponseModel>(theatre);
+            }
 
             return mappedLectures;
         }

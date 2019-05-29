@@ -12,5 +12,6 @@ namespace Lantern.Domain.Lectures.Services
         Task<IEnumerable<LectureTheatre>> GetAll();
         Task Save(LectureTheatre lectureTheatre);
         Task<LectureTheatre> GetById(Guid requestLectureTheatreId);
+        Task<IEnumerable<LectureTheatre>> GetById(IEnumerable<Guid> theatreIds);
     }
 }
