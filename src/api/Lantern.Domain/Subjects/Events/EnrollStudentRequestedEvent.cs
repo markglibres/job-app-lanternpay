@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Lantern.Domain.Subjects.Events
 {
-    public class EnrollStudentRequestedEvent : DomainEvent, INotification
+    public class EnrollStudentRequestedEvent : DomainEvent
     {
         public Guid SubjectId { get; }
         public Guid StudentId { get; }
@@ -18,6 +18,6 @@ namespace Lantern.Domain.Subjects.Events
             StudentId = studentId;
         }
 
-        public Guid EnrollmentId => Id;
+        public Guid ApplicationId => Id;
     }
 }

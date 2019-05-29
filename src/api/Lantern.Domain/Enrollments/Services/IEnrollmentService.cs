@@ -8,16 +8,18 @@ namespace Lantern.Domain.Enrollments.Services
 {
     public interface IEnrollmentService
     {
-        Task<bool> IsExists(Guid enrollmentId);
-        Task<Student> GetStudent(Guid enrollmentId);
-        Task<Domain.Subjects.Subject> GetSubject(Guid notificationEnrollmentId);
-        Task<Enrollment> Create(
-            Guid notificationEnrollmentId, 
-            Guid notificationSubjectId, 
-            Guid notificationStudentId);
+        Task<bool> IsExists(Guid applicationId);
+        Task<Student> GetStudent(Guid applicationId);
+        Task<Domain.Subjects.Subject> GetSubject(Guid applicationId);
+        Enrollment Create(
+            Guid applicationId, 
+            Guid subjectId, 
+            Guid studentId);
 
-        Task<bool> ExceedsCapacity(Guid notificationSubjectId);
+        Task<bool> ExceedsCapacity(Guid subjectId);
         Task Save(Enrollment enrollment);
-        Task<bool> ExceedsStudentHours(Guid notificationSubjectId, Guid notificationStudentId);
+        Task<bool> ExceedsStudentHours(Guid subjectId, Guid studentId);
+        Task<Enrollment> GetByApplicationId(Guid applicationId);
+        Task<double> GetStudentHours(Guid studentId);
     }
 }

@@ -1,6 +1,9 @@
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Lantern.Api.Application.Enrollments.ResponseModels;
+using Lantern.Core.Services.Enrollments.Exceptions;
 using Lantern.Core.Services.Students.Exceptions;
 using Lantern.Core.Services.Subjects.Exceptions;
 using Lantern.Domain.Students.Services;
@@ -9,7 +12,7 @@ using MediatR;
 
 namespace Lantern.Api.Application.Enrollments.Commands.Handlers
 {
-    public class CreateEnrollmentCommandHandler : IRequestHandler<CreateEnrollmentCommand, CreateEnrollmentCommandModel>
+    public class CreateEnrollmentCommandHandler : IRequestHandler<CreateEnrollmentCommand, CreateEnrollmentResponseModel>
     {
         private readonly IStudentService _studentService;
         private readonly ISubjectService _subjectService;
@@ -21,7 +24,7 @@ namespace Lantern.Api.Application.Enrollments.Commands.Handlers
             _studentService = studentService;
             _subjectService = subjectService;
         }
-        public async Task<CreateEnrollmentCommandModel> Handle(CreateEnrollmentCommand request, CancellationToken cancellationToken)
+        public async Task<CreateEnrollmentResponseModel> Handle(CreateEnrollmentCommand request, CancellationToken cancellationToken)
         {
             if (!await _studentService.IsExists(request.StudentId)) 
                 throw new StudentIdDoesNotExistsException(request.StudentId.ToString());
@@ -32,9 +35,14 @@ namespace Lantern.Api.Application.Enrollments.Commands.Handlers
             var subject = await _subjectService.GetById(request.SubjectId);
             var student = await _studentService.GetById(request.StudentId);
 
-            var enrollmentId = subject.Enroll(student);
+            if (subject.Students.Any(_ => _.Id == student.Id))
+                throw new StudentAlreadyEnrolledException(student.Name, subject.Name);
 
-            return new CreateEnrollmentCommandModel{ EnrollmentId = enrollmentId };
+            var applicationId = subject.Enroll(student);
+
+            await _subjectService.Save(subject);
+
+            return new CreateEnrollmentResponseModel{ ApplicationId = applicationId };
 
         }
     }

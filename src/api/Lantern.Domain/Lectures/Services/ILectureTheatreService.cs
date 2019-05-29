@@ -13,5 +13,6 @@ namespace Lantern.Domain.Lectures.Services
         Task Save(LectureTheatre lectureTheatre);
         Task<LectureTheatre> GetById(Guid requestLectureTheatreId);
         Task<IEnumerable<LectureTheatre>> GetById(IEnumerable<Guid> theatreIds);
+        Task<bool> IsValidLectureTime(Guid requestLectureTheatreId, DateTime start, DateTime end);
     }
 }

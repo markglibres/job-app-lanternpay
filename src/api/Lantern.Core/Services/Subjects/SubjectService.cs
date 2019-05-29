@@ -12,10 +12,14 @@ namespace Lantern.Core.Services.Subjects
     public class SubjectService : ISubjectService
     {
         private readonly IRepository<Subject> _repository;
+        private readonly IDomainEventsService _domainEventsService;
 
-        public SubjectService(IRepository<Subject> repository)
+        public SubjectService(
+            IRepository<Subject> repository,
+            IDomainEventsService domainEventsService)
         {
             _repository = repository;
+            _domainEventsService = domainEventsService;
         }
         
         public async Task<Subject> Create(string name)
@@ -48,6 +52,8 @@ namespace Lantern.Core.Services.Subjects
         public async Task Save(Subject subject)
         {
             await _repository.SaveAsync(subject);
+            
+             _domainEventsService.Publish(subject.Events);
         }
 
         public async Task<bool> IsExists(Guid subjectId)
@@ -60,9 +66,22 @@ namespace Lantern.Core.Services.Subjects
             return await _repository.FindByIdAsync(subjectId);
         }
 
-        public Task<IEnumerable<Subject>> GetAllByStudentId(Guid requestStudentId)
+        public async Task<IEnumerable<Subject>> GetAllByStudentId(Guid studentId)
         {
-            throw new NotImplementedException();
+            return await _repository.FindByPredicate(subject =>
+                subject.Students.Any(_ => _.Id == studentId));
+        }
+
+        public async Task<double> GetTotalHours(Guid subjectId)
+        {
+            var subject = await _repository.FindByIdAsync(subjectId);
+            var lectureHours = subject
+                .Lectures
+                .Select(_ => (_.EndTime - _.StartTime).TotalHours)
+                .Sum();
+
+            return lectureHours;
+
         }
     }
 }

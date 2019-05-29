@@ -4,14 +4,14 @@ using MediatR;
 
 namespace Lantern.Domain.Enrollments.Events
 {
-    public class EnrollmentApprovedEvent : DomainEvent, INotification
+    public class EnrollmentApprovedEvent : DomainEvent
     {
-        public EnrollmentApprovedEvent(Guid enrollmentId)
+        public EnrollmentApprovedEvent(Guid applicationId)
         {
             Id = Guid.NewGuid();
-            EnrollmentId = enrollmentId;
+            ApplicationId = applicationId;
         }
 
-        public Guid EnrollmentId { get; }
+        public Guid ApplicationId { get; }
     }
 }

@@ -14,13 +14,16 @@ namespace Lantern.Domain.Subjects
         [JsonConstructor]
         private Subject()
         {
+            Lectures = new List<Lecture>();
+            Students = new List<Student>();
+            Events = new List<IDomainEvent>();
         }
 
-        public Subject(string name)
+        public Subject(string name) : this()
         {
             Name = name;
             Id = Guid.NewGuid();
-            Lectures = new List<Lecture>();
+            
         }
 
         public string Name { get; private set; }
@@ -53,7 +56,7 @@ namespace Lantern.Domain.Subjects
 
             Emit(enrollmentRequest);
 
-            return enrollmentRequest.Id;
+            return enrollmentRequest.ApplicationId;
         }
 
         public void AddStudent(Student student)

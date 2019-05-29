@@ -62,5 +62,12 @@ namespace Lantern.Core.Services.Lectures
             return await _repository.FindByIdAsync(theatreIds);
 
         }
+
+        //for any future time availability of theatre
+        public async Task<bool> IsValidLectureTime(Guid requestLectureTheatreId, DateTime start, DateTime end)
+        {
+            var totalHours = (end - start).TotalHours;
+            return  0 < totalHours && totalHours < 12;
+        }
     }
 }

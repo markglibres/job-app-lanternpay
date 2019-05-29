@@ -2,10 +2,13 @@ using Lantern.Api.Application.Lectures.ResponseModels;
 using Lantern.Api.Application.Mappers.Services;
 using Lantern.Api.Application.Subjects.ResponseModels;
 using Lantern.Core.SeedWork;
+using Lantern.Core.Services.Enrollments;
+using Lantern.Core.Services.Events;
 using Lantern.Core.Services.Lectures;
 using Lantern.Core.Services.Students;
 using Lantern.Core.Services.Subjects;
 using Lantern.Domain.Enrollments;
+using Lantern.Domain.Enrollments.Services;
 using Lantern.Domain.Lectures;
 using Lantern.Domain.Lectures.Services;
 using Lantern.Domain.SeedWork;
@@ -31,7 +34,9 @@ namespace Lantern.Api.DependencyInjection
 
             services.AddTransient<ILectureTheatreService, LectureTheatreService>()
                 .AddTransient<IStudentService, StudentService>()
-                .AddTransient<ISubjectService, SubjectService>();
+                .AddTransient<ISubjectService, SubjectService>()
+                .AddTransient<IDomainEventsService, DomainEventsService>()
+                .AddTransient<IEnrollmentService, EnrollmentService>();
 
             services
                 .AddTransient<IEntityMapperService<LectureResponseModel>, LectureEntityMapperService>()

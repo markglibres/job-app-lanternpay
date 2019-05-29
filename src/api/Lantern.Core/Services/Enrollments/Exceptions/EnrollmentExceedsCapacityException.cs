@@ -1,6 +1,6 @@
 using System;
 
-namespace Lantern.Api.Application.Enrollments.Exceptions
+namespace Lantern.Core.Services.Enrollments.Exceptions
 {
     public class EnrollmentExceedsCapacityException : Exception
     {

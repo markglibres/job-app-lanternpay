@@ -36,7 +36,7 @@ namespace Lantern.Domain.Enrollments
         public void Approve()
         {
             Status = EnrollmentStatus.Approved;
-            Emit(new EnrollmentApprovedEvent(Id));
+            Emit(new EnrollmentApprovedEvent(ApplicationId));
         }
 
         public void Reject(EnrollmentRejectReason reason)

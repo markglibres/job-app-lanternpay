@@ -12,6 +12,8 @@ namespace Lantern.Domain.Subjects.Services
         Task Save(Subject subject);
         Task<bool> IsExists(Guid requestSubjectId);
         Task<Subject> GetById(Guid requestSubjectId);
-        Task<IEnumerable<Subject>> GetAllByStudentId(Guid requestStudentId);
+        Task<IEnumerable<Subject>> GetAllByStudentId(Guid studentId);
+        Task<double> GetTotalHours(Guid subjectId);
+        
     }
 }

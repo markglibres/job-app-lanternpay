@@ -1,14 +1,18 @@
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Lantern.Domain.SeedWork
 {
     public abstract class AggregateRoot : Entity, IHasDomainEvents
     {
-        public IEnumerable<IDomainEvent> Events { get; protected set; }
+        [IgnoreDataMember] 
+        public List<IDomainEvent> Events { get; protected set; }
         
         public void Emit(IDomainEvent domainEvent)
         {
-            ((List<IDomainEvent>)Events).Add(domainEvent);
+            if(Events == null) Events = new List<IDomainEvent>();
+            
+            Events.Add(domainEvent);
         }
     }
 }

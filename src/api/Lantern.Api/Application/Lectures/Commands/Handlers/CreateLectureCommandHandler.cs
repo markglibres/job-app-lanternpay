@@ -40,6 +40,14 @@ namespace Lantern.Api.Application.Lectures.Commands.Handlers
             if (!await _lectureTheatreService.IsExists(request.LectureTheatreId))
                 throw new LectureTheatreIdDoesNotExistsException(request.LectureTheatreId.ToString());
 
+            if (!await _lectureTheatreService.IsValidLectureTime(
+                request.LectureTheatreId,
+                request.StartTime,
+                request.EndTime))
+                throw new InvalidLectureTimingsException(
+                    request.LectureTheatreId.ToString(),
+                    request.StartTime, request.EndTime);
+            
             var subject = await _subjectService.GetById(request.Id);
             var lectureTheatreId = await _lectureTheatreService.GetById(request.LectureTheatreId);
 

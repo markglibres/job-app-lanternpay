@@ -1,6 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Lantern.Api.Application.Enrollments.Exceptions;
+using Lantern.Core.Services.Enrollments.Exceptions;
 using Lantern.Domain.Enrollments.Events;
 using Lantern.Domain.Enrollments.Services;
 using Lantern.Domain.Subjects.Services;
@@ -23,11 +23,11 @@ namespace Lantern.Api.Application.EventHandlers
 
         public async Task Handle(EnrollmentApprovedEvent notification, CancellationToken cancellationToken)
         {
-            if (!await _enrollmentService.IsExists(notification.EnrollmentId))
-                throw new EnrollmentIdDoesNotExistsException();
+            if (!await _enrollmentService.IsExists(notification.ApplicationId))
+                throw new EnrollmentApplicationIdDoesNotExistsException(notification.ApplicationId.ToString());
 
-            var student = await _enrollmentService.GetStudent(notification.EnrollmentId);
-            var subject = await _enrollmentService.GetSubject(notification.EnrollmentId);
+            var student = await _enrollmentService.GetStudent(notification.ApplicationId);
+            var subject = await _enrollmentService.GetSubject(notification.ApplicationId);
 
             subject.AddStudent(student);
 

@@ -4,7 +4,7 @@ namespace Lantern.Domain.SeedWork
 {
     public interface IHasDomainEvents
     {
-        IEnumerable<IDomainEvent> Events { get; }
+        List<IDomainEvent> Events { get; }
         void Emit(IDomainEvent domainEvent);
     }
 }

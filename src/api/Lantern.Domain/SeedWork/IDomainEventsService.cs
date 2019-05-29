@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Lantern.Domain.SeedWork
 {
     public interface IDomainEventsService
     {
-        void Publish(IEnumerable<IDomainEvent> domainEvents);
+        Task Publish(IEnumerable<IDomainEvent> domainEvents);
     }
 }

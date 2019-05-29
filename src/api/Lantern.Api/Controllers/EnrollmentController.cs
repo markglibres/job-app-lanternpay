@@ -1,6 +1,7 @@
 using System.Net;
 using System.Threading.Tasks;
 using Lantern.Api.Application.Enrollments.Commands;
+using Lantern.Api.Application.Enrollments.ResponseModels;
 using Lantern.Domain.Enrollments;
 using Lantern.Domain.Enrollments.Services;
 using MediatR;
@@ -12,16 +13,16 @@ namespace Lantern.Api.Controllers
     [ApiController]
     public class EnrollmentController : Controller
     {
-        private readonly Mediator _mediator;
+        private readonly IMediator _mediator;
 
         public EnrollmentController(
-            Mediator mediator)
+            IMediator mediator)
         {
             _mediator = mediator;
         }
         
         [HttpPost]
-        [ProducesResponseType(typeof(CreateEnrollmentCommandModel), (int) HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(CreateEnrollmentResponseModel), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> Enroll([FromBody] CreateEnrollmentCommand command)
         {
             var result = await _mediator.Send(command);

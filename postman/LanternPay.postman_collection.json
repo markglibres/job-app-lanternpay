@@ -306,6 +306,34 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Enroll",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"subjectId\": \"{{subjectId}}\",\n\t\"studentId\": \"{{studentId}}\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/enrollments",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"enrollments"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

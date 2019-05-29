@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="Application\Enrollments\Queries\Handlers" />
+    <Folder Include="Application\EventHandlers" />
     <Folder Include="Application\Subjects\Exceptions" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
