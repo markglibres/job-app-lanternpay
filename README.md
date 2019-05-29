@@ -14,9 +14,9 @@ A simple demonstration for the following:
 
 **References / Inspiration for the patterns and designs used on this project**
 
-[The Ideal Domain-Driven Design Aggregate Store](https://kalele.io/the-ideal-domain-driven-design-aggregate-store/)
-[Dependency Injection in .Net](http://sd.blackball.lv/library/Dependency_Injection_in_.NET_(2011).pdf)
-[Microsoft eShop](https://github.com/dotnet-architecture/eShopOnContainers)
+* [The Ideal Domain-Driven Design Aggregate Store](https://kalele.io/the-ideal-domain-driven-design-aggregate-store/)
+* [Dependency Injection in .Net](http://sd.blackball.lv/library/Dependency_Injection_in_.NET_(2011).pdf)
+* [Microsoft eShop](https://github.com/dotnet-architecture/eShopOnContainers)
 
 **Project Structure**
 1. API
