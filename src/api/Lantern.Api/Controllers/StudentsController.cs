@@ -52,10 +52,11 @@ namespace Lantern.Api.Controllers
 
         [HttpGet]
         [Route("{Id}/enrollments")]
-        [ProducesResponseType(typeof(GetEnrollmentsByStudentIdQueryModel), (int) HttpStatusCode.OK)]
-        public async Task<IActionResult> GetEnrollmentsByStudent(GetEnrollmentsByStudentIdQuery query)
+        [ProducesResponseType(typeof(GetEnrollmentsByStudentIdQueryResponseModel), (int) HttpStatusCode.OK)]
+        public async Task<IActionResult> GetEnrollmentsByStudent([FromRoute] GetEnrollmentsByStudentIdQuery query)
         {
-            return Ok();
+            var result = await _mediator.Send(query);
+            return Ok(result);
         }
         
     }

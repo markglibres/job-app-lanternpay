@@ -1,6 +1,10 @@
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using Lantern.Api.Application.Enrollments.Commands.Handlers;
+using Lantern.Api.Application.Students.ResponseModels;
+using Lantern.Api.Application.Subjects.ResponseModels;
 using Lantern.Core.Services.Students.Exceptions;
 using Lantern.Domain.Students.Services;
 using Lantern.Domain.Subjects.Services;
@@ -10,20 +14,23 @@ namespace Lantern.Api.Application.Students.Queries.Handlers
 {
     public class
         GetEnrollmentsByStudentIdQueryHandler : IRequestHandler<GetEnrollmentsByStudentIdQuery,
-            GetEnrollmentsByStudentIdQueryModel>
+            GetEnrollmentsByStudentIdQueryResponseModel>
     {
+        private readonly IMapper _mapper;
         private readonly IStudentService _studentService;
         private readonly ISubjectService _subjectService;
 
         public GetEnrollmentsByStudentIdQueryHandler(
+            IMapper mapper,
             IStudentService studentService,
             ISubjectService subjectService)
         {
+            _mapper = mapper;
             _studentService = studentService;
             _subjectService = subjectService;
         }
 
-        public async Task<GetEnrollmentsByStudentIdQueryModel> Handle(GetEnrollmentsByStudentIdQuery request,
+        public async Task<GetEnrollmentsByStudentIdQueryResponseModel> Handle(GetEnrollmentsByStudentIdQuery request,
             CancellationToken cancellationToken)
         {
             if (!await _studentService.IsExists(request.Id)) 
@@ -32,11 +39,11 @@ namespace Lantern.Api.Application.Students.Queries.Handlers
             var subjects = await _subjectService.GetAllByStudentId(request.Id);
             var student = await _studentService.GetById(request.Id);
 
-            var response = new GetEnrollmentsByStudentIdQueryModel
+            var response = new GetEnrollmentsByStudentIdQueryResponseModel
             {
                 Id = student.Id,
                 Name = student.Name,
-                Subjects = subjects
+                Subjects = _mapper.Map<IEnumerable<SubjectLecturesResponseModel>>(subjects)
             };
 
             return response;
