@@ -12,13 +12,26 @@ A simple demonstration for the following:
 * Docker
 * RESTful API (did not apply jsonapi standard due to time constraints)
 
-**References / Inspiration for the patterns and designs used on this project**
+## Table of Contents
+
+- [References](#references)
+- [Project Structure](#project-structure)
+- [How to run API with docker](#how-to-run-api-with-docker)
+- [Testing using Postman collection](#testing-using-postman-collection)
+- [How to debug API](#how-to-debug-api)
+- [How to run console app file reverse project](#how-to-run-console-app-file-reverse-project)
+- [Software Architecture](#software-architecture)
+
+### References
+[back to top](#table-of-contents)
 
 * [The Ideal Domain-Driven Design Aggregate Store](https://kalele.io/the-ideal-domain-driven-design-aggregate-store/)
 * [Dependency Injection in .Net](http://sd.blackball.lv/library/Dependency_Injection_in_.NET_(2011).pdf)
 * [Microsoft eShop](https://github.com/dotnet-architecture/eShopOnContainers)
 
-**Project Structure**
+### Project Structure
+[back to top](#table-of-contents)
+
 1. API
 
    * Lantern.API = Application Layer
@@ -32,7 +45,8 @@ A simple demonstration for the following:
     * Lantern.File.Test = file console unit tests
     * Lantern.File.Api = unit test for API (skipped due to time constraints)
 
-**How to run API with docker**
+### How to run API with docker
+[back to top](#table-of-contents)
 
 1. Go to project root folder 
 
@@ -64,8 +78,8 @@ p: password
 5. API endpoint is accessible at: http://localhost:5000
 6. Swagger endpoint is at: http://localhost:5000/swagger
 
-**Testing using Postman collection**
-
+### Testing using Postman collection
+[back to top](#table-of-contents)
 
 1. Import postman collections found at /postman/LanternPay.postman_collection.json
 2. Import postman environment variables at /postman/LanternPay.postman_environment.json
@@ -81,7 +95,8 @@ p: password
 
 *All other postman collections can be accessed at any order and time (depending on the values of variables used)*
 
-**How to debug API**
+### How to debug API
+[back to top](#table-of-contents)
 
 1. Go to project root folder 
 
@@ -110,7 +125,8 @@ dotnet run
 7. Api endpoint at: http://localhost:5000/
 8. Attach debugger from Visual Studio or JetBrains Rider
 
-**How to run console app file reverse project**
+### How to run console app file reverse project
+[back to top](#table-of-contents)
 
 1. On shell, go to /src/file/Lantern.File
 2. Edit input.txt for the file to reverse
@@ -125,3 +141,9 @@ dotnet run
 5. Check output_<datetime tick value>.txt contents (every run generates a unique filename if output.txt already exists)
   
 NOTE: Unit tests can be found on /src/tests
+
+### Software Architecture
+[back to top](#table-of-contents)
+
+Diagram can be found on /src/diagram/eShop-microservice.jpg
+![Software Architecture](https://github.com/markglibres/job-app-lanternpay/blob/master/src/diagram/eShop-microservice.jpg)
